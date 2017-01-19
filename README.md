@@ -30,6 +30,8 @@ npm install mufa --save;
 
 #Documentation :
 
+See [here](https://abdennour.github.io/mufa/) .
+
 # License:
 
 MIT .
