@@ -1,7 +1,7 @@
 {
   "name": "mufa",
-  "version": "0.0.2",
-  "description": "Still under development. It is not yet mature. Thank you for your understanding!",
+  "version": "0.0.3",
+  "description": "Event driven programming . Useful to separate layers (View, logic,...etc)",
   "main": "index.js",
   "scripts": {
     "compile": "babel -d lib/ src/   --no-comments",
@@ -21,7 +21,23 @@
   },
   "keywords": [
     "es7",
-    "mufa"
+    "mufa",
+    "event-driven",
+    "sub-pub",
+    "sub/pub",
+    "layers",
+    "architecture",
+    "subscribe",
+    "publish",
+    "event-driven-architecture",
+    "redux-alternative",
+    "flux-alternative",
+    "simple",
+    "integration",
+    "less-coupling",
+    "concerns",
+    "mufawwad",
+    "المُفَوَّض"
   ],
   "author": "Abdennour TOUMI <http://abdennoor.com>",
   "license": "MIT",

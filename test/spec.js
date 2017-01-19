@@ -70,9 +70,33 @@ describe('Mufa', () => {
       return _;
    })();
   });
-  it(`implements sub/pub pattern`, () => {
+
+  it(`implements sub(on)/pub(fire) pattern`, () => {
+     const callback = sinon.spy();
+     mufa.on('sendEmoji', callback);
+     mufa.fire('sendEmoji', '👏');
+     expect(callback.withArgs('👏').calledOnce).toBeTruthy();
+
+     mufa.fire('sendEmoji', '♻️');
+     expect(callback.calledTwice).toBeTruthy();
+
+  });
+
+  it(`restricts only one subscription when listening with "one" method`, () => {
+    const callback = sinon.spy();
+    mufa.one('sendEmoji', callback);
+    mufa.fire('sendEmoji', '👏');
+    expect(callback.withArgs('👏').calledOnce).toBeTruthy();
+    mufa.fire('sendEmoji', '💡');
+    expect(callback.calledTwice).toBeFalsy();
+    expect(callback.calledOnce).toBeTruthy();
+
+  });
+
+  it(`shows a case of sub/pub pattern`, () => {
       new ClassB().init();
       new ClassA().getUsers();
       expect(true).toBeTruthy();
+
   });
 });
