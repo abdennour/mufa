@@ -99,4 +99,13 @@ describe('Mufa', () => {
       expect(true).toBeTruthy();
 
   });
+
+  it(`supports multiple messages `, () => {
+    const messages = [ '⚛', '🎙', '🕗', '📚'];
+    const callback = sinon.spy();
+    mufa.on('sendEmojis', callback);
+    mufa.fire('sendEmojis', ...messages);
+    expect(callback.withArgs(...messages).calledOnce).toBeTruthy();
+
+  });
 });

@@ -51,17 +51,17 @@ class Mufawwad {
    * @method pub
    * @memberof Mufa
    * @param  {String}    event  The event name
-   * @param  {*}         data   message to be sent to subscribers
+   * @param  {*}         data   message(s) to be sent to subscribers
    * @return {undefined}
    */
-  pub(event, data) {
+  pub(event, ...data) {
     const subsToRemove = [];
     this.registry.find(
       'subscriber',
       ((record) => record.event === event)
     ).forEach((record) => {
       if (typeof record.callback === 'function')
-        record.callback(data);
+        record.callback(...data);
       if (record.once)
         subsToRemove.push(record.id);
     });
@@ -108,7 +108,7 @@ class Mufawwad {
    * It is an alias of [mufa.pub](#Mufapub)
    * @method fire
    * @param  {String}    event  The event name
-   * @param  {*}         data   message to be sent to subscribers
+   * @param  {*}         data   message(s) to be sent to subscribers
    * @return {undefined}
    */
   fire() {
