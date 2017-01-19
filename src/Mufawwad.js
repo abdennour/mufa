@@ -1,4 +1,5 @@
 import Registry from './Registry';
+import {Autobind} from 'babel-autobind';
 
 /**
  * المُفَوّض  or The **MUFA**wwad is the engine of this library.
@@ -129,4 +130,4 @@ class Mufawwad {
 /**
  * @typedef {Array} Registry
  */
-export default Mufawwad;
+export default Autobind(Mufawwad);
