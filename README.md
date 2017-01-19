@@ -3,7 +3,7 @@
 
 # Overview :
 
-Still under development. It is not yet mature. Thank you for your understanding!
+  Mufa is an abbreviation of مُفَوَّضْ (Mufawwad) which is an arabic word and it means DELEGATOR. 
 
 # Install
 

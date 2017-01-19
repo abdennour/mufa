@@ -4,7 +4,7 @@
   "description": "Still under development. It is not yet mature. Thank you for your understanding!",
   "main": "index.js",
   "scripts": {
-    "compile": "babel --presets es2015,stage-3,react -d lib/ src/",
+    "compile": "babel -d lib/ src/   --no-comments",
     "cdn": "node cdn/generator.js",
     "prepublish": "npm run compile && npm run cdn",
     "start": "node server",
@@ -20,7 +20,8 @@
     "url": "git+https://github.com/abdennour/mufa.git"
   },
   "keywords": [
-      "es7", "mufa"
+    "es7",
+    "mufa"
   ],
   "author": "Abdennour TOUMI <http://abdennoor.com>",
   "license": "MIT",
@@ -30,12 +31,14 @@
   "homepage": "https://github.com/abdennour/mufa#readme",
   "devDependencies": {
     "autobind-decorator": "^1.3.4",
+    "babel-autobind": "^0.3.4",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-istanbul": "^0.11.0",
     "babel-loader": "^6.2.8",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-syntax-decorators": "^6.13.0",
+    "babel-plugin-transform-builtin-extend": "^1.1.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
