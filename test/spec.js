@@ -108,4 +108,30 @@ describe('Mufa', () => {
     expect(callback.withArgs(...messages).calledOnce).toBeTruthy();
 
   });
+
+  it(`unsubscribes`, () => {
+    const callback = sinon.spy();
+    const subscription= mufa.on('sendEmojis', callback);
+    mufa.fire('sendEmojis');
+    expect(callback.callCount).toEqual(1);
+    mufa.fire('sendEmojis');
+    expect(callback.callCount).toEqual(2);
+    mufa.off(subscription);
+    mufa.fire('sendEmojis');
+    expect(callback.callCount).toEqual(2);
+
+  });
+
+    it(`unsubscribes multiple subscriptions in the same transaction`, () => {
+      const callbackA = sinon.spy(),
+      callbackB = sinon.spy(),
+      subscriptionA= mufa.on('sendEmojis', callbackA),
+      subscriptionB= mufa.on('sendEmojis', callbackB);
+      mufa.off(subscriptionA, subscriptionB);
+      mufa.fire('sendEmojis');
+      mufa.fire('sendEmojis');
+      expect(callbackA.callCount + callbackB.callCount).toEqual(0);
+
+    });
+
 });

@@ -75,6 +75,20 @@ class Mufawwad {
   }
 
   /**
+   * Cancel the subscription which was done with "sub" or "one" or "once"
+   * @method unsub
+   * @memberof Mufa
+   * @param  {Subscription} subscriptions One subscription for each argument
+   * @return {Array<Subscription>}               arguments
+   */
+   unsub(...subscriptions) {
+    subscriptions.forEach(({id}) => {
+      this.registry.remove('subscriber', (record => record.id === id ));
+    });
+    return subscriptions;
+  }
+
+  /**
    * Subscribe to event and save the callback to be running when the event is published (fired).
    *
    * It is an alias of [mufa.sub](#Mufasub)
@@ -114,6 +128,17 @@ class Mufawwad {
    */
   fire() {
     return this.pub(...arguments);
+  }
+
+  /**
+   * Cancel the subscription which was done with "sub" or "one" or "once"
+   * It is an alias of [mufa.unsub](#Mufaunsub).
+   * @method off
+   * @param  {Subscription} subscriptions One subscription for each argument
+   * @return {Array<Subscription>}               arguments
+   */
+  off() {
+    return this.unsub(...arguments);
   }
 
 }
