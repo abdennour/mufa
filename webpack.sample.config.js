@@ -4,17 +4,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: [
-    './docs-site/src/boot'
+    './sample-site/src/boot'
   ],
   output: {
-    path: path.resolve('./docs-site/'),
+    path: path.resolve('./sample-site/'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
 
-    // Needed to direct the docs to the local version of the datepicker, this is not needed for
+    // Needed to direct the sample to the local version of the datepicker, this is not needed for
     // normal setup.
     alias: {
       'mufa': path.resolve('./src/index.js')

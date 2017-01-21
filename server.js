@@ -1,7 +1,7 @@
 var express = require('express')
 var webpack = require('webpack')
 var merge = require('lodash/merge')
-var config = merge({}, require('./webpack.docs.config'))
+var config = merge({}, require('./webpack.sample.config'))
 
 config.devtool = 'cheap-module-eval-source-map'
 config.entry.unshift('webpack-hot-middleware/client')
@@ -20,7 +20,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler))
 
-app.use(express.static('docs-site'))
+app.use(express.static('sample-site'))
 
 app.listen(8008, 'localhost', function (err) {
   if (err) {
