@@ -1,7 +1,7 @@
-import {serviceA} from './ServiceA';
+import {apiService} from './ApiService';
 
 const services = [
-  serviceA
+  apiService
 ];
 
 export default function(on, fire) {

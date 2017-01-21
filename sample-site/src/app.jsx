@@ -15,7 +15,9 @@ class App extends React.Component {
 
   mufaDidMount() {
     this.on('success_getGitUserInfo', this.onSuccessGetGitUserInfo);
-    this.on('fail_getGitUserInfo', this.onFailGetGitUserInfo);
+    this.on('fail_getGitUserInfo', this.onFail);
+    this.on('success_getFollowers', this.onSuccessGetFollowers);
+    this.on('fail_getFollowers', this.onFail);
   }
 
   componentDidMount() {
@@ -24,13 +26,21 @@ class App extends React.Component {
 
   onSuccessGetGitUserInfo(userInfo) {
     if (userInfo && userInfo.message === 'Not Found')
-      return this.onFailGetGitUserInfo(this.refs.username.value+' is not found in github.');
-    this.setState({userInfo, message: null, isLoading:false})
+      return this.onFail(this.refs.username.value+' is not found in github.');
+
+    this.setState({userInfo, message: null, isLoading:false});
+    this.fire('start_getFollowers', userInfo.login);
   }
 
-  onFailGetGitUserInfo(error) {
+  onFail(error) {
     this.setState({message: String(error), userInfo: null ,isLoading:false});
 
+  }
+
+  onSuccessGetFollowers(followers) {
+    this.setState({
+      followers
+    });
   }
 
   onKeyUp(event) {
@@ -45,6 +55,22 @@ class App extends React.Component {
     return (<div style={{color:'red'}}>{this.state.message}</div>)
   }
 
+  renderAvatar(url, title=""){
+    return (
+      <img src={url} title={title}  style={{maxWidth: '100%', height: 'auto'}} width="171" height="171" />
+    );
+  }
+
+  renderFollowers() {
+    if (this.state.followers ) {
+      return (
+        <ul><h3>followers</h3>
+        {this.state.followers.map(f =>  <li className="horizontal" onClick={() => this.fire('start_getGitUserInfo', f.login) && this.fire('start_getFollowers', f.login)}>{this.renderAvatar(f.avatar_url, f.login)}</li> )}
+        </ul>
+      );
+    }
+  }
+
   renderUserInfo() {
    const {isLoading,  userInfo}= this.state;
     if (isLoading || !userInfo) return null;
@@ -56,14 +82,14 @@ class App extends React.Component {
             ))}
         </ul>
     );
-     const avatar = (
-        <img src={userInfo.avatar_url} style={{maxWidth: '100%', height: 'auto'}} width="171" height="171" />
-    );
 
     return (
       <div>
         <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
-        {avatar}
+        {this.renderAvatar(userInfo.avatar_url)}
+        </div>
+        <div>
+          {this.renderFollowers()}
         </div>
         <div>
           {infoList}

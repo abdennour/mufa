@@ -22,7 +22,7 @@ app.use(require('webpack-hot-middleware')(compiler))
 
 app.use(express.static('sample-site'))
 
-app.listen(8008, 'localhost', function (err) {
+app.listen(8008, process.env.HOST || 'localhost', function (err) {
   if (err) {
     console.log(err)
     return
