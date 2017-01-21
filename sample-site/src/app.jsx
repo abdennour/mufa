@@ -3,7 +3,7 @@ import {Autobind} from 'babel-autobind';
 
 @Autobind
 class App extends React.Component {
-  state= {userInfo:''};
+  state= {userInfo:null, isLoading: false, message: null};
 
   on() {
     this.props.mufa.on(...arguments);
@@ -25,21 +25,29 @@ class App extends React.Component {
   onSuccessGetGitUserInfo(userInfo) {
     if (userInfo && userInfo.message === 'Not Found')
       return this.onFailGetGitUserInfo(this.refs.username.value+' is not found in github.');
-    this.setState({userInfo: this.renderUserInfo(userInfo), color:'green'})
+    this.setState({userInfo, message: null, isLoading:false})
   }
 
   onFailGetGitUserInfo(error) {
-    this.setState({userInfo:String(error), color:'red'});
+    this.setState({message: String(error), userInfo: null ,isLoading:false});
 
   }
 
   onKeyUp(event) {
     if (event.which == 13 || event.keyCode == 13) {
+      this.setState({isLoading: true});
       this.fire('start_getGitUserInfo',  event.target.value);
     }
   }
 
-  renderUserInfo(userInfo) {
+  renderWhenError() {
+    if (this.state.isLoading || this.state.userInfo) return null;
+    return (<div style={{color:'red'}}>{this.state.message}</div>)
+  }
+
+  renderUserInfo() {
+   const {isLoading,  userInfo}= this.state;
+    if (isLoading || !userInfo) return null;
     const infoList = (
         <ul>
           {Object.keys(userInfo)
@@ -49,7 +57,7 @@ class App extends React.Component {
         </ul>
     );
      const avatar = (
-        <img src={userInfo.avatar_url} style={{maxWidth: '100%', height: 'auto'}} />
+        <img src={userInfo.avatar_url} style={{maxWidth: '100%', height: 'auto'}} width="171" height="171" />
     );
 
     return (
@@ -65,6 +73,13 @@ class App extends React.Component {
     );
   }
 
+  renderWhenLoading() {
+    if (!this.state.isLoading) return null;
+    const style = {display: 'flex',justifyContent: 'center',alignItems: 'center'};
+    return (
+      <div style={style}><span className="rotating">⏳</span></div>
+    );
+  }
   render() {
 
     return (
@@ -77,7 +92,11 @@ class App extends React.Component {
                 type="text"
                 placeholder="Enter github username ,then press ENTER"
                 onKeyUp={this.onKeyUp}  />
-              <div style={{color: this.state.color}}>{this.state.userInfo}</div>
+              <div >
+                {this.renderWhenLoading()}
+                {this.renderUserInfo()}
+                {this.renderWhenError()}
+              </div>
           </div>
 
         </div>
