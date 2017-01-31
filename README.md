@@ -14,6 +14,15 @@
 npm install mufa --save;
 ```
 
+or, use as CDN :
+
+```html
+ <script
+   src="https://rawgit.com/abdennour/mufa/master/cdn/mufa-latest.js"
+   type="text/javascript">
+</script>
+```
+
 # Example :
 
 ```js
