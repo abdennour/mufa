@@ -1,5 +1,6 @@
 import Mufawwad from './Mufawwad';
 export default Mufawwad;
+export const mufa = new Mufawwad();
 /*
 
   subId = mufa.sub(event, (data) => callback(data));

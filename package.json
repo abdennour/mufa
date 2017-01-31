@@ -1,10 +1,10 @@
 {
   "name": "mufa",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Event driven programming . Useful to separate layers (View, logic,...etc)",
   "main": "index.js",
   "scripts": {
-    "compile": "babel -d lib/ src/   --no-comments",
+    "compile": "babel -d lib/ src/  --no-comments",
     "cdn": "node cdn/generator.js",
     "prepublish": "npm run compile && npm run cdn",
     "start": "node server",

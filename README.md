@@ -17,9 +17,7 @@ npm install mufa --save;
 # Example :
 
 ```js
-  import Mufa from 'mufa';
-
-  const mufa = new Mufa();
+  import {mufa} from 'mufa';
   // publish
   setTimeout(() => {
     mufa.fire('sendEmoji', '👏');

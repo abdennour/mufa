@@ -39,6 +39,16 @@ describe(`Registry`, () => {
     registry.remove('t1', (record) => record.aa === 199);
     expect(registry.find('t1', (record) => record.id == toDel.id ).length).toEqual(0);
   });
+  it(`clears the whole table`, () => {
+    expect(registry.length).toEqual(0);
+    registry.insert('t1', {aa:4, bb:5});
+    registry.insert('t1', {aa:4, bb:5});
+    registry.insert('t1', {aa:4, bb:5});
+    expect(registry.length).toEqual(3);
+    registry.remove('t1');
+    expect(registry.find('t1').length).toEqual(0);
+    expect(registry.length).toEqual(0);
+  });
 });
 
 describe('Mufa', () => {
@@ -122,16 +132,22 @@ describe('Mufa', () => {
 
   });
 
-    it(`unsubscribes multiple subscriptions in the same transaction`, () => {
-      const callbackA = sinon.spy(),
-      callbackB = sinon.spy(),
-      subscriptionA= mufa.on('sendEmojis', callbackA),
-      subscriptionB= mufa.on('sendEmojis', callbackB);
-      mufa.off(subscriptionA, subscriptionB);
-      mufa.fire('sendEmojis');
-      mufa.fire('sendEmojis');
-      expect(callbackA.callCount + callbackB.callCount).toEqual(0);
+  it(`unsubscribes multiple subscriptions in the same transaction`, () => {
+    const callbackA = sinon.spy(),
+    callbackB = sinon.spy(),
+    subscriptionA= mufa.on('sendEmojis', callbackA),
+    subscriptionB= mufa.on('sendEmojis', callbackB);
+    mufa.off(subscriptionA, subscriptionB);
+    mufa.fire('sendEmojis');
+    mufa.fire('sendEmojis');
+    expect(callbackA.callCount + callbackB.callCount).toEqual(0);
 
-    });
+  });
+
+  it(`gives a ready instance of Mufa`, () => {
+    const Mufawwad = require('../src').default;
+    const {mufa} = require('../src');
+    expect(mufa).toBeA(Mufawwad);
+  });
 
 });
