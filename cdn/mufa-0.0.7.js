@@ -1,7 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+const lib = require('../index');
+window.Mufa = lib.default;
+window.mufa= lib.mufa;
+
+},{"../index":2}],2:[function(require,module,exports){
 module.exports = require('./lib/index.js');
 
-},{"./lib/index.js":5}],2:[function(require,module,exports){
+},{"./lib/index.js":6}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105,7 +110,7 @@ var Mufawwad = function () {
 }();
 
 exports.default = (0, _babelAutobind.Autobind)(Mufawwad);
-},{"./Registry":3,"babel-autobind":6}],3:[function(require,module,exports){
+},{"./Registry":4,"babel-autobind":7}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -216,7 +221,7 @@ var Registry = function (_extendableBuiltin2) {
 }(_extendableBuiltin(Array));
 
 exports.default = Registry;
-},{"./helper":4}],4:[function(require,module,exports){
+},{"./helper":5}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -227,7 +232,7 @@ var getId = exports.getId = function getId() {
   var suffix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '_';
   return prefix + parseInt(Math.random() * 10E10) + Date.now() + suffix;
 };
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -243,10 +248,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _Mufawwad2.default;
 var mufa = exports.mufa = new _Mufawwad2.default();
-},{"./Mufawwad":2}],6:[function(require,module,exports){
+},{"./Mufawwad":3}],7:[function(require,module,exports){
 module.exports = require('./lib');
 
-},{"./lib":7}],7:[function(require,module,exports){
+},{"./lib":8}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
