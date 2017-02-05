@@ -11,22 +11,17 @@ import {Autobind} from 'babel-autobind';
  *  @author Abdennour <http://abdennoor.com>
  *
  * @example
- * import Mufa from 'mufa';
- * const mufa = new Mufa();
+ * import {on, fire} from 'mufa';
  * // publish
  * setTimeout(() => {
- *   mufa.fire('sendEmoji', '👏')
+ *   fire('sendEmoji', '👏')
  * }, 1000)  ;
  * // subscribe
- * mufa.on('sendEmoji', (emoji) => console.log(emoji));
+ * on('sendEmoji', (emoji) => console.log(emoji));
 
  */
 class Mufawwad {
-  /**
-   * The store
-   * @memberof Mufa
-   * @type {Registry}
-   */
+
   registry = new Registry();
 
   /**
@@ -152,7 +147,4 @@ class Mufawwad {
  *
  */
 
-/**
- * @typedef {Array} Registry
- */
 export default Autobind(Mufawwad);

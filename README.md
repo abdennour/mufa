@@ -26,13 +26,13 @@ or, use as CDN :
 # Example :
 
 ```js
-  import {mufa} from 'mufa';
+  import {on, fire} from 'mufa';
   // publish
   setTimeout(() => {
-    mufa.fire('sendEmoji', '👏');
+     fire('sendEmoji', '👏');
   }, 1000)  ;
   // subscribe
-  mufa.on('sendEmoji', (emoji) => console.log(emoji));
+  on('sendEmoji', (emoji) => console.log(emoji));
 ```
 
 #Documentation :

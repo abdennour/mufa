@@ -2,7 +2,7 @@ import 'jsdom-global/register';
 import expect from 'expect';
 import sinon from 'sinon';
 
-import Mufa from '../src';
+import Mufa,{on, fire} from '../src';
 import Registry from '../src/Registry';
 
 describe(`Registry`, () => {
@@ -144,10 +144,21 @@ describe('Mufa', () => {
 
   });
 
-  it(`gives a ready instance of Mufa`, () => {
-    const Mufawwad = require('../src').default;
-    const {mufa} = require('../src');
-    expect(mufa).toBeA(Mufawwad);
-  });
+   it(`allows to access global mufa without need of instantiate one`, () => {
+     const spier= sinon.spy();
+     on('send', (data) => spier(data));
+     fire('send', 'xxx');
+     expect(spier.withArgs('xxx').calledOnce).toBeTruthy();
+
+      const otherImport= require('../src');
+      otherImport.fire('send', 'yyy');
+      expect(spier.calledTwice).toBeTruthy();
+
+      otherImport.on('do', (...args)=> spier(...args));
+      fire('do');
+      expect(spier.calledThrice).toBeTruthy();
+
+
+   });
 
 });

@@ -1,16 +1,16 @@
 import React from 'react';
 import {Autobind} from 'babel-autobind';
-
+import {on, fire} from 'mufa';
 @Autobind
 class App extends React.Component {
   state= {userInfo:null, isLoading: false, message: null};
 
   on() {
-    this.props.mufa.on(...arguments);
+    on(...arguments);
   }
 
   fire() {
-    this.props.mufa.fire(...arguments);
+    fire(...arguments);
   }
 
   mufaDidMount() {

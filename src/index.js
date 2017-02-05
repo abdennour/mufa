@@ -1,5 +1,14 @@
 import Mufawwad from './Mufawwad';
-export const mufa = new Mufawwad();
+const mufa = new Mufawwad();
+
+export const on = mufa.on;
+export const one = mufa.one;
+export const sub = mufa.sub;
+
+export const pub = mufa.pub;
+export const off = mufa.off;
+export const fire = mufa.fire;
+
 export default Mufawwad;
 /*
 
